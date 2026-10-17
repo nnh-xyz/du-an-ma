@@ -662,6 +662,7 @@
     </style>
   </head>
   <body>
+    <audio id="bg-music" src="nhac.mp3" loop preload="auto"></audio>
     <div id="name-modal">
       <div class="modal-box">
         <!-- BƯỚC 1: NHẬP TÊN -->
@@ -1006,11 +1007,20 @@
         }
       });
 
-      function selectRole(roleKey) {
-        if (started) return;
-        started = true;
+      
+function selectRole(roleKey) {
+  if (started) return;
+  started = true;
 
-        const template = TEMPLATES[roleKey] || TEMPLATES.friend;
+  // Phát nhạc ngay khi chọn vai trò
+  const music = document.getElementById("bg-music");
+  music.volume = 0.6; // Âm lượng 60%
+  music.play().catch(err => {
+    console.log("Không thể phát nhạc:", err);
+  });
+
+  const template = TEMPLATES[roleKey] || TEMPLATES.friend;
+
 
         CFG.name = enteredName;
         CFG.l2 = enteredName.toUpperCase();
