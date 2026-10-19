@@ -664,7 +664,7 @@
       .recipient-row .t2 { min-width:0; }
       .hoai-sticker[hidden], #orn-heart[hidden] { display:none !important; }
       #name-sticker { width:auto; height:1em; flex:none; object-fit:contain; }
-      #heart-sticker { width:auto; height:1.2em; object-fit:contain; }
+      #heart-sticker { width:auto; height:2.4em; object-fit:contain; }
     </style>
   </head>
   <body>
@@ -1033,16 +1033,16 @@ function selectRole(roleKey) {
   const template = TEMPLATES[roleKey] || TEMPLATES.friend;
 
 
+        const isHoai = enteredName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes("hoai");
         CFG.name = enteredName;
-        CFG.l2 = enteredName.toUpperCase();
+        CFG.l2 = isHoai ? "Hà Ho Ài" : enteredName.toUpperCase();
         CFG.intro = template.getIntro(enteredName);
         CFG.wishes = template.wishes;
         CFG.quote = template.quote;
         CFG.sign = template.sign;
         document.title = `Gửi ${enteredName} 💖`;
 
-        const isHoai = enteredName.normalize("NFC").toLocaleLowerCase("vi").includes("hoài");
-        $("name").textContent = isHoai ? "Hà Ho Ài" : CFG.name;
+        $("name").textContent = CFG.name;
         $("name-sticker").hidden = !isHoai;
         $("heart-sticker").hidden = !isHoai;
         $("orn-heart").hidden = isHoai;
