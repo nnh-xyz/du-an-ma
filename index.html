@@ -7,6 +7,11 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <title>Ahhihiihihi</title>
+    <meta name="description" content="Một lời chúc 20/10 dành riêng cho bạn 💌" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ahhihiihihi" />
+    <meta property="og:description" content="Một lời chúc 20/10 dành riêng cho bạn 💌" />
+    <meta name="twitter:card" content="summary" />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Dancing+Script:wght@600&family=Be+Vietnam+Pro:wght@300;400;600&display=swap&subset=vietnamese"
       rel="stylesheet"
@@ -813,8 +818,8 @@
         <span class="badge">20 · 10 &nbsp;Ngày Phụ nữ Việt Nam</span>
         <div class="big">💖</div>
         <p class="t1">Gửi tới</p>
-        <div class="recipient-row"><h1 class="t2" id="name"></h1><img id="name-sticker" class="hoai-sticker" src="img2.png" alt="" hidden /></div>
-        <div class="orn">❀ <span id="orn-heart">❤</span><img id="heart-sticker" class="hoai-sticker" src="img1.png" alt="" hidden /> ❀</div>
+        <div class="recipient-row"><h1 class="t2" id="name"></h1><span id="name-sticker" class="hoai-sticker" hidden></span></div>
+        <div class="orn">❀ <span id="orn-heart">❤</span><span id="heart-sticker" class="hoai-sticker" hidden></span> ❀</div>
         <div id="msg"></div>
         <div class="wishes" id="wishes"></div>
         <div class="quote" id="quote"></div>
@@ -1043,6 +1048,19 @@ function selectRole(roleKey) {
         document.title = `Gửi ${enteredName} 💖`;
 
         $("name").textContent = CFG.name;
+        // Chỉ tạo ảnh sau khi người xem nhập tên phù hợp.
+        // Trang ban đầu không có ảnh nhãn để trình xem trước link lấy nhầm.
+        if (isHoai) {
+          [["name-sticker", "img2.png"], ["heart-sticker", "img1.png"]].forEach(([id, src]) => {
+            const placeholder = $(id);
+            const sticker = document.createElement("img");
+            sticker.id = id;
+            sticker.className = placeholder.className;
+            sticker.alt = "";
+            sticker.src = src;
+            placeholder.replaceWith(sticker);
+          });
+        }
         $("name-sticker").hidden = !isHoai;
         $("heart-sticker").hidden = !isHoai;
         $("orn-heart").hidden = isHoai;
@@ -1290,4 +1308,5 @@ function selectRole(roleKey) {
     </script>
     </body>
 </html>
+
 
