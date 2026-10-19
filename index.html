@@ -883,14 +883,14 @@
         crush: {
           tag: "Crush",
           getIntro: (name) =>
-            `Gửi ${name} - Cô gái tớ thàm thương. Chúc cậu có một ngày 20/10 thật hạnh phúc, xinh đẹp và luôn nở nụ cười làm tan chảy trái tim tớ tiếp nheseee <3 🌹`,
+            `Gửi ${name} - Cô gái tớ thầm thương. Chúc cậu có một ngày 20/10 thật hạnh phúc, xinh đẹp và luôn nở nụ cười làm tan chảy trái tim tớ tiếp nhé <3 🌹`,
           wishes: [
             ["💘", "Xinh đẹp nhất", "Trong mắt mình, cậu luôn là điều tuyệt vời nhất."],
             ["💞", "Được yêu thương", "Luôn được nâng niu và chở che mỗi ngày."],
             ["💫", "Ấm áp", "Mong mọi điều dịu dàng nhất sẽ đến với cậu."],
             ["💌", "Gắn kết", "Hy vọng tụi mình có cơ hội bên nhao."],
           ],
-          quote: "Trái đất có 8 tỷ người, nhưng cạu là người duy nhất làm tan chảy trái tim tớ.",
+          quote: "Trái đất có 8 tỷ người, nhưng cạu là người duy nhất làm tớ rung động.",
           sign: "—Gửi người không tồn tại— 💌",
         },
       };
@@ -1035,7 +1035,7 @@ function selectRole(roleKey) {
 
         const isHoai = enteredName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes("hoai");
         CFG.name = enteredName;
-        CFG.l2 = isHoai ? "Hà Ho Ài" : enteredName.toUpperCase();
+        CFG.l2 = isHoai ? "Ho Ài" : enteredName.toUpperCase();
         CFG.intro = template.getIntro(enteredName);
         CFG.wishes = template.wishes;
         CFG.quote = template.quote;
