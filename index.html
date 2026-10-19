@@ -659,6 +659,12 @@
       @media (prefers-reduced-motion: reduce) {
         .emoji-motion { animation: none; }
       }
+
+      .recipient-row { display:flex; align-items:center; justify-content:center; gap:.25em; font-size:clamp(1.7rem,8vw,2.4rem); }
+      .recipient-row .t2 { min-width:0; }
+      .hoai-sticker[hidden], #orn-heart[hidden] { display:none !important; }
+      #name-sticker { width:auto; height:1em; flex:none; object-fit:contain; }
+      #heart-sticker { width:auto; height:1.2em; object-fit:contain; }
     </style>
   </head>
   <body>
@@ -807,8 +813,8 @@
         <span class="badge">20 · 10 &nbsp;Ngày Phụ nữ Việt Nam</span>
         <div class="big">💖</div>
         <p class="t1">Gửi tới</p>
-        <h1 class="t2" id="name"></h1>
-        <div class="orn">❀ ❤ ❀</div>
+        <div class="recipient-row"><h1 class="t2" id="name"></h1><img id="name-sticker" class="hoai-sticker" src="img2.png" alt="" hidden /></div>
+        <div class="orn">❀ <span id="orn-heart">❤</span><img id="heart-sticker" class="hoai-sticker" src="img1.png" alt="" hidden /> ❀</div>
         <div id="msg"></div>
         <div class="wishes" id="wishes"></div>
         <div class="quote" id="quote"></div>
@@ -1014,6 +1020,11 @@ function selectRole(roleKey) {
 
   // Phát nhạc ngay khi chọn vai trò
   const music = document.getElementById("bg-music");
+  const track = roleKey === "crush" ? "nhac2.mp3" : "nhac.mp3";
+  if (music.getAttribute("src") !== track) {
+    music.src = track;
+    music.load();
+  }
   music.volume = 0.6; // Âm lượng 60%
   music.play().catch(err => {
     console.log("Không thể phát nhạc:", err);
@@ -1030,7 +1041,11 @@ function selectRole(roleKey) {
         CFG.sign = template.sign;
         document.title = `Gửi ${enteredName} 💖`;
 
-        $("name").textContent = CFG.name;
+        const isHoai = enteredName.normalize("NFC").toLocaleLowerCase("vi").includes("hoài");
+        $("name").textContent = isHoai ? "Hà Ho Ài" : CFG.name;
+        $("name-sticker").hidden = !isHoai;
+        $("heart-sticker").hidden = !isHoai;
+        $("orn-heart").hidden = isHoai;
         $("quote").textContent = CFG.quote;
         $("sign").textContent = CFG.sign;
         $("wishes").innerHTML = CFG.wishes
@@ -1275,3 +1290,4 @@ function selectRole(roleKey) {
     </script>
     </body>
 </html>
+
